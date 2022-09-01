@@ -1,31 +1,8 @@
-"""distutils.command
+from distutils.command.bdist import bdist
+import sys
 
-Package containing implementation of all the standard Distutils
-commands."""
+if 'egg' not in bdist.format_commands:
+    bdist.format_command['egg'] = ('bdist_egg', "Python .egg file")
+    bdist.format_commands.append('egg')
 
-__all__ = ['build',
-           'build_py',
-           'build_ext',
-           'build_clib',
-           'build_scripts',
-           'clean',
-           'install',
-           'install_lib',
-           'install_headers',
-           'install_scripts',
-           'install_data',
-           'sdist',
-           'register',
-           'bdist',
-           'bdist_dumb',
-           'bdist_rpm',
-           'bdist_wininst',
-           'check',
-           'upload',
-           # These two are reserved for future use:
-           #'bdist_sdux',
-           #'bdist_pkgtool',
-           # Note:
-           # bdist_packager is not included because it only provides
-           # an abstract base class
-          ]
+del bdist, sys
